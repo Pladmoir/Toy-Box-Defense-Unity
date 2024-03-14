@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
@@ -16,11 +18,27 @@ public class Turret : MonoBehaviour
     {
         
     }
-
-
+    [Header("References")]
+    [SerializeField] private LayerMask enemyMask; 
     [Header("Attribute")]
     [SerializeField] private float targetingRange = 5f;
 
+    private Transform target;
+        if(Target == null){
+            FindTarget();
+    return;
+        }
+    }
+private void FindTarget()
+{
+    RaycastHit2D[] hits = Physics2D.CircleCastAll(Transform.position, targetingRange, (Vector2)
+    Transform.position, 0f, enemyMask);
+
+    if (hits.Length > 0)
+    {
+        Target = hits[0].transform;
+    }
+}
     private void OnDrawGizmosSelected()
     {
         Handles.color = Color.cyan;
