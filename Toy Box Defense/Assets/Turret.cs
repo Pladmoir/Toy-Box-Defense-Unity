@@ -4,6 +4,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Turret : MonoBehaviour
 {
@@ -24,12 +25,20 @@ public class Turret : MonoBehaviour
     [SerializeField] private float targetingRange = 5f;
 
     private Transform target;
-        if(Target == null){
+
+    private void Update() {
+        if (target == null)
+        {
             FindTarget();
-    return;
+            return;
         }
     }
-private void FindTarget()
+       
+        }
+   
+        
+    
+
 {
     RaycastHit2D[] hits = Physics2D.CircleCastAll(Transform.position, targetingRange, (Vector2)
     Transform.position, 0f, enemyMask);
